@@ -17,6 +17,9 @@ if [ ! -d "$WKHTMLTOPDF_PATH" ]; then
 	echo '-----> Downloading wkhtmltopdf (via local buildpack)'
 	mkdir -p $(dirname $ARCHIVE_FILENAME)
 	wget --quiet --continue --output-document="$ARCHIVE_FILENAME" "$WKHTMLTOPDF_URL"
+    echo '-----> Downloaded:'
+    ls -l "$ARCHIVE_FILENAME"
+    bunzip2 --test "$ARCHIVE_FILENAME"
 
 	echo '-----> Extracting wkhtmltopdf'
 	tar --bzip2 --extract --file "$ARCHIVE_FILENAME" --directory "$CACHE_DIR"
