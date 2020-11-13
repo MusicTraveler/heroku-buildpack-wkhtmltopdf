@@ -20,7 +20,7 @@ if [ ! -d "$WKHTMLTOPDF_PATH" ]; then
 
 	echo '-----> Extracting wkhtmltopdf'
 	tar --bzip2 --extract --file "$ARCHIVE_FILENAME" --directory "$CACHE_DIR"
-	rm "$XZ_FILENAME"
+	rm "$ARCHIVE_FILENAME"
 fi
 
 # Move files to /app/bin
