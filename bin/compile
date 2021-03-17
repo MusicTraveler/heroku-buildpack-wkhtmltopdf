@@ -12,6 +12,7 @@ WKHTMLTOPDF_URL="https://s3.amazonaws.com/musictraveler.herokuapp.com/wkhtmltox-
 ARCHIVE_FILENAME=$CACHE_DIR/$(basename $WKHTMLTOPDF_URL)
 WKHTMLTOPDF_PATH=$CACHE_DIR/wkhtmltox
 DESTINATION=$BUILD_DIR/bin  # will be `/app/bin` inside dyno
+JASPER_DESTINATION=$BUILD_DIR/.heroku/vendor/lib
 
 
 # Download and extract wkhtmltopdf
@@ -37,8 +38,13 @@ if [ ! -f "$DESTINATION/wkhtmltopdf" ]; then
 
 	cp $WKHTMLTOPDF_PATH/bin/* $DESTINATION
 
-    echo '-----> Moving libjasper libs to /app/.heroku/vendor/lib'
-    mkdir -p /app/.heroku/vendor/lib
-    cp $WKHTMLTOPDF_PATH/lib/* /app/.heroku/vendor/lib
+    echo '-----> Moving libjasper libs to $JASPER_DESTINATION' #/app/.heroku/vendor/lib'
+    if [ ! -d "$JASPER_DESTINATION" ]; then
+        echo mkdir -p "$JASPER_DESTINATION"
+        mkdir -p "$JASPER_DESTINATION"
+    fi
+    #cp $WKHTMLTOPDF_PATH/lib/* /app/.heroku/vendor/lib
+    echo cp $WKHTMLTOPDF_PATH/lib/* $JASPER_DESTINATION
+    cp $WKHTMLTOPDF_PATH/lib/* $JASPER_DESTINATION
 
 fi
