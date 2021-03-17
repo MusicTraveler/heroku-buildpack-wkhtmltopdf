@@ -38,6 +38,7 @@ if [ ! -f "$DESTINATION/wkhtmltopdf" ]; then
 	cp $WKHTMLTOPDF_PATH/bin/* $DESTINATION
 
     echo '-----> Moving libjasper libs to /app/.heroku/vendor/lib'
-	cp $WKHTMLTOPDF_PATH/lib/* /app/.heroku/vendor/lib
+    mkdir -p /app/.heroku/vendor/lib
+    cp $WKHTMLTOPDF_PATH/lib/* /app/.heroku/vendor/lib
 
 fi
